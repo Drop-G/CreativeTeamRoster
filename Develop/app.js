@@ -46,13 +46,13 @@ function employeePrompt() {
     ])
 
     .then(function({name, role, email, id}) {
-        let roleinfo = "";
+        let roleInfo = "";
         if (role === "Manager") {
-            roleInfo = "officeNumber"
+            roleInfo = "office phone number"
         } else if (role === "Engineer") {
             roleInfo = "GitHub username"
         } else {
-            roleinfo = "School"
+            roleInfo = "school name"
         }
         inquirer.prompt ([
             {
@@ -72,7 +72,7 @@ function employeePrompt() {
             let newMember;
             if (role === "Manager") {
                 newMember = new Manager(name, email, id, roleInfo)
-            } else if (role==="engineer"){
+            } else if (role==="Engineer"){
                 newMember = new Engineer(name, email, id, roleInfo)
             } else {
                 newMember = new Intern(name, email, id, roleInfo)
@@ -80,18 +80,10 @@ function employeePrompt() {
             team.push(newMember);
             addHtml(newMember)
             .then(function() {
-                if (addedMembers === "yes"){
-                    try {
-                    addMember();
-                    } catch (err){
-                        console.log(err)
-                    }
+                if (addedMembers === "Yes"){
+                    employeePrompt();
                 } else {
-                    try {
-                    finishHtml();
-                } catch (err){
-                    console.log(err)
-                }
+                    finishHtml()
                 }
             });
             
